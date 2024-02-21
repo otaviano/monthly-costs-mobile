@@ -13,12 +13,10 @@ class ListCosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 10,
-        childAspectRatio: 3 / 4,
+        crossAxisCount: 3,
+        crossAxisSpacing: 10,
       ),
       itemCount: costs.length,
       itemBuilder: ((context, index) {

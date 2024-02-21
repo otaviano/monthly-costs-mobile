@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:monthly_costs/screens/home.dart';
+import 'package:monthly_costs/screens/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Custos mensais',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blueGrey,
       ),
       home: const Home(),
     );

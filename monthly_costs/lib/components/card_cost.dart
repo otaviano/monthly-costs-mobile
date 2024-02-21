@@ -19,10 +19,11 @@ class CardCost extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-            width: 150.0,
-            height: 150.0,
+            width: 100.0,
+            height: 100.0,
             child: ElevatedButton(
               style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Color.fromRGBO(133, 172, 147, 0.498)),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
@@ -30,7 +31,7 @@ class CardCost extends StatelessWidget {
               onPressed: () {
                 print(id);
               },
-              child: Text(name)
+              child: Text(name, style: TextStyle(color: Colors.black),)
             )
         ),
       ],
