@@ -21,11 +21,13 @@ class CostValueFormState extends State<CostValueForm> {
   final _formKey = GlobalKey<FormState>();
   late CostValue _costValue;
   final myController = TextEditingController();
+  Future<String>? sumOfCurrentMonth;
 
   CostValueFormState();
   @override
   void initState() {
     super.initState();
+    sumOfCurrentMonth = getSumOfCurrentMonth(widget.costId);
     _costValue = CostValue(
         id: '',
         costId: widget.costId,
@@ -55,7 +57,21 @@ class CostValueFormState extends State<CostValueForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.costName),
+              Text(
+                style: TextStyle(fontSize: 25, color: Color.fromRGBO(32, 70, 32, 0.898)),
+                widget.costName),
+              FutureBuilder(
+                  future: sumOfCurrentMonth,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(snapshot.data ?? "0.0", style: TextStyle(fontSize: 20, color: Color.fromRGBO(32, 70, 32, 0.898)));
+                    } else if (snapshot.hasError) {
+                      return Text('Error summarizing total month!!!');
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Valor'),
                 keyboardType: TextInputType.number,
@@ -77,9 +93,12 @@ class CostValueFormState extends State<CostValueForm> {
                 decoration: InputDecoration(labelText: 'Mês'),
                 initialValue: getMonthNow().toString(),
                 keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp('[1-12]'))
+                ],
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Favor entra com uma data válida (AAAA-MM-DD)';
+                    return 'Favor entrar com um mês válido';
                   }
                   return null;
                 },

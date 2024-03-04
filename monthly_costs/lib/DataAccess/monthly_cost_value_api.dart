@@ -19,3 +19,18 @@ Future<String> createCostValue(CostValue costvalue) async {
   final json = jsonDecode(response.body);
   return json['id'];
 }
+
+Future<String> getSumOfCurrentMonth(String costId) async {
+  final response = await http.get(
+    Uri.parse('http://192.168.0.187:8002/api/v1/costvalues/$costId/sum')
+  );
+
+  if (response.statusCode != 200) {
+    print('Failed to post data: ${response.statusCode}');
+
+    return "";
+  }
+
+  final json = jsonDecode(response.body);
+  return json['total'].toString();
+}
