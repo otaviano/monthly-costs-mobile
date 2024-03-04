@@ -21,12 +21,7 @@ class ListCosts extends StatelessWidget {
       itemCount: costs.length,
       itemBuilder: ((context, index) {
         final cost = costs[index];
-        return CardCost(
-          id: cost.id,
-          name: cost.name,
-          avarage: cost.avarage,
-          paymentMethod: cost.paymentMethod
-        );
+        return CardCost(cost: cost);
       }),
     );
   }

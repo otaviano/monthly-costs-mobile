@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:monthly_costs/Models/Cost.dart';
+import 'package:monthly_costs/screens/cost_value/cost_value_form.dart';
 
 class CardCost extends StatelessWidget {
-  final String id;
-  final String name;
-  final String avarage;
-  final String paymentMethod;
+  final Cost cost;
 
-  const CardCost(
-      {Key? key,
-      required this.id,
-      required this.name,
-      required this.avarage,
-      required this.paymentMethod})
-      : super(key: key);
+  const CardCost( {Key? key, required this.cost})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +23,12 @@ class CardCost extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.0),
                     side: BorderSide(color: Color.fromARGB(255, 65, 69, 71))))),
               onPressed: () {
-                print(id);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CostValueForm(costId: cost.id, costName: cost.name)),
+                );
               },
-              child: Text(name, style: TextStyle(color: Colors.black),)
+              child: Text(cost.name, style: TextStyle(color: Colors.black),)
             )
         ),
       ],

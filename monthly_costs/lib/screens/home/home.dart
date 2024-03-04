@@ -3,6 +3,8 @@ import 'package:monthly_costs/DataAccess/monthly_cost_api.dart';
 import 'package:monthly_costs/Models/Cost.dart';
 import 'package:monthly_costs/components/list_costs.dart';
 
+import '../../components/header.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -22,20 +24,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: header(),
+      appBar: Header(),
       body: body(),
-    );
-  }
-
-  AppBar header() {
-    return AppBar(
-      toolbarHeight: 250,
-      backgroundColor: Colors.transparent,
-      flexibleSpace: Image(
-        image: AssetImage('assets/images/logo-leaf-black.png'),
-        fit: BoxFit.cover,
-      ),
-      centerTitle: true,
     );
   }
 
@@ -47,8 +37,8 @@ class _HomeState extends State<Home> {
           final costs = snapshot.data as List<Cost>;
           return Center(
               child: Stack(children: [
-                Text("Minhas contas mensais",style: const TextStyle( fontSize: 15)), 
-                ListCosts(costs: costs)]));
+            ListCosts(costs: costs)
+          ]));
         } else if (snapshot.hasError) {
           return Center(
             child: Text(
